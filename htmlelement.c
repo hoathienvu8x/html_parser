@@ -5,6 +5,8 @@ HTMLElement::HTMLElement(std::string tag) : tagName(tag), id("") {
     m_attributes["class"] = "";
 }
 
+HTMLElement::HTMLElement(HTMLElement *parent) : m_parent(parent) {}
+
 HTMLElement *HTMLElement::appendChild(std::unique_ptr<HTMLElement> && newNode){
     newNode->m_parent = this;
     childrens.emplace_back(std::move(newNode));

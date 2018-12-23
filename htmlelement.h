@@ -11,6 +11,7 @@
 class HTMLElement {
     public:
         HTMLElement(std::string);
+        HTMLElement(HTMLElement *);
         HTMLElement *appendChild(std::unique_ptr<HTMLElement> &&);
         HTMLElement *firstChild();
         HTMLElement *lastChild();
