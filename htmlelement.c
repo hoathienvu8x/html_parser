@@ -11,6 +11,44 @@ HTMLElement *HTMLElement::appendChild(std::unique_ptr<HTMLElement> && newNode){
     return newNode.get();
 }
 
+HTMLElement *HTMLElement::firstChild(){
+    return children(0);
+}
+
+HTMLElement *HTMLElement::lastChild(){
+    return children(-1);
+}
+
+HTMLElement *HTMLElement::nextSibling(){
+    if(m_parent == NULL) {
+        return nullptr;
+    }
+    size_t index = 0;
+    size_t count = childrens.size();
+    while(index < count && this != m_parent->childrens[index].get()) {
+        ++index;
+    }
+    if(++index >= count) {
+        return nullptr;
+    }
+    return m_parent->childrens[index].get();
+}
+
+HTMLElement *HTMLElement::prevSibling(){
+    if (m_parent == NULL) {
+        return nullptr;
+    }
+    size_t index = 0;
+    size_t count = childrens.size();
+    while(index < count && this != m_parent->childrens[index].get()) {
+        ++index;
+    }
+    if (--index < 0) {
+        return nullptr;
+    }
+    return m_parent->childrens[index].get();
+}
+
 bool HTMLElement::hasClass(std::string className) const {
     const auto &names = m_attributes.at("class");
     return names.find(className) != std::string::npos;

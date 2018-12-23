@@ -12,6 +12,10 @@ class HTMLElement {
     public:
         HTMLElement(std::string);
         HTMLElement *appendChild(std::unique_ptr<HTMLElement> &&);
+        HTMLElement *firstChild();
+        HTMLElement *lastChild();
+        HTMLElement *nextSibling();
+        HTMLElement *prevSibling();
         bool hasClass(std::string) const;
         void addClass(std::string &);
         void setAttribute(std::string &, std::string);
